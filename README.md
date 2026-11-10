@@ -2,6 +2,8 @@
 
 TubeFlow; herkese açık YouTube videolarını incelemek ve indirme izniniz olan içerikleri kaydetmek için Windows'ta yerel çalışan bir Flask uygulamasıdır. Ses ve video indirme, FFmpeg ile MP3 dönüştürme, indirme ilerlemesini izleme, yerel geçmiş ve aynı Wi-Fi ağındaki telefona geçici QR bağlantısıyla dosya aktarma özelliklerini sunar.
 
+![TubeFlow uygulama ekran görüntüsü](screenshoot.png)
+
 ## Windows'ta başlatma
 
 1. Python 3.10 veya üzeri sürümü kurun; Python başlatıcısının (`py`) kullanılabilir olduğundan emin olun.
