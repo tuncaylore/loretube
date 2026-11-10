@@ -4,6 +4,13 @@ TubeFlow; herkese açık YouTube videolarını incelemek ve indirme izniniz olan
 
 ![TubeFlow uygulama ekran görüntüsü](screenshoot.png)
 
+## Kullanılan diller ve teknolojiler
+
+- **Python** — uygulama sunucusu ve indirme işlemleri
+- **HTML, CSS ve JavaScript** — web arayüzü
+- **Flask, yt-dlp ve qrcode** — web sunucusu, medya işlemleri ve QR kodları
+- **FFmpeg** — ses/video dönüştürme ve birleştirme
+
 ## Windows'ta başlatma
 
 1. Python 3.10 veya üzeri sürümü kurun; Python başlatıcısının (`py`) kullanılabilir olduğundan emin olun.
