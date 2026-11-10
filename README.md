@@ -1,16 +1,16 @@
 # TubeFlow
 
-TubeFlow is a local Flask app for inspecting publicly accessible YouTube videos and downloading content the user is authorized to save. It supports audio, MP3 conversion (FFmpeg required), video downloads, progress reporting, local history, and temporary QR links for transfer to a phone on the same local network.
+TubeFlow; herkese açık YouTube videolarını incelemek ve indirme izniniz olan içerikleri kaydetmek için Windows'ta yerel çalışan bir Flask uygulamasıdır. Ses ve video indirme, FFmpeg ile MP3 dönüştürme, indirme ilerlemesini izleme, yerel geçmiş ve aynı Wi-Fi ağındaki telefona geçici QR bağlantısıyla dosya aktarma özelliklerini sunar.
 
-## Start on Windows
+## Windows'ta başlatma
 
-1. Install Python 3.10 or newer and make sure the Python launcher (`py`) is available.
-2. Double-click `run.bat`. It creates `.venv` if needed, installs the dependencies from `requirements.txt`, and starts the app.
-3. Open `http://127.0.0.1:5000` if the browser does not open automatically. Close the terminal or press Ctrl+C to stop TubeFlow.
+1. Python 3.10 veya üzeri sürümü kurun; Python başlatıcısının (`py`) kullanılabilir olduğundan emin olun.
+2. `run.bat` dosyasına çift tıklayın. Gerekirse `.venv` sanal ortamını oluşturur, `requirements.txt` içindeki paketleri kurar ve uygulamayı başlatır.
+3. Tarayıcı kendiliğinden açılmazsa `http://127.0.0.1:5000` adresine gidin. Uygulamayı durdurmak için terminali kapatın veya Ctrl+C tuşlarına basın.
 
-On first start, `run.bat` checks for FFmpeg and, if missing, downloads the Windows essentials ZIP from Gyan.dev (a Windows build provider linked by ffmpeg.org), verifies its published SHA-256 checksum, and installs the executables under `tools/ffmpeg/bin/`. No system-wide PATH changes or administrator permissions are needed; LoreFlow discovers this project-local path automatically. If the download or checksum verification fails, the app still starts with FFmpeg-dependent options unavailable. You can also set `TUBEFLOW_FFMPEG` to an existing FFmpeg executable or its containing directory.
+İlk başlatmada `run.bat`, FFmpeg'i kontrol eder. FFmpeg kurulu değilse ffmpeg.org'un işaret ettiği Windows derleme sağlayıcısı Gyan.dev'den gerekli ZIP dosyasını indirir, yayımlanan SHA-256 özetiyle doğrular ve çalıştırılabilir dosyaları `tools/ffmpeg/bin/` klasörüne kurar. Sistem PATH'i değiştirilmez ve yönetici izni gerekmez. İndirme veya doğrulama başarısız olsa da uygulama açılır; FFmpeg gerektiren özellikler kullanılamayabilir. Var olan FFmpeg konumunu `TUBEFLOW_FFMPEG` ortam değişkeniyle belirtebilirsiniz.
 
-## Run manually
+## Elle çalıştırma
 
 ```powershell
 py -3 -m venv .venv
@@ -18,17 +18,19 @@ py -3 -m venv .venv
 .venv\Scripts\python.exe run.py
 ```
 
-The main interface binds to `127.0.0.1`. Phone transfer uses a separate local-network server and an unguessable, expiring token; both devices must be on the same Wi-Fi. No internet-facing server or router port forwarding is configured. A firewall prompt may appear when enabling local-network transfer.
+Ana arayüz yalnızca `127.0.0.1` adresinde çalışır. Telefona aktarım ayrı bir yerel ağ sunucusu ve tahmin edilemeyen, süresi dolan bir token kullanır; iki cihazın aynı Wi-Fi ağında olması gerekir. İnternete açık sunucu veya yönlendiricide port yönlendirme yapılandırılmaz. Yerel ağ aktarımı etkinleştirilirken güvenlik duvarı izni istenebilir.
 
-## Configuration
+## Yapılandırma
 
-Environment variables: `TUBEFLOW_PORT` (default `5000`), `TUBEFLOW_LAN_PORT` (default `5001`), `TUBEFLOW_LAN_IP` (optional private IPv4 override), `TUBEFLOW_FFMPEG`, `TUBEFLOW_DOWNLOAD_DIR`, `TUBEFLOW_DATA_DIR`, `TUBEFLOW_TOKEN_TTL` (seconds), `TUBEFLOW_RETENTION_DAYS`, `TUBEFLOW_MAX_HISTORY`, `TUBEFLOW_MAX_CONCURRENT`, and `TUBEFLOW_NO_BROWSER=1`.
+Ortam değişkenleri: `TUBEFLOW_PORT` (varsayılan `5000`), `TUBEFLOW_LAN_PORT` (varsayılan `5001`), `TUBEFLOW_LAN_IP` (isteğe bağlı özel IPv4 adresi), `TUBEFLOW_FFMPEG`, `TUBEFLOW_DOWNLOAD_DIR`, `TUBEFLOW_DATA_DIR`, `TUBEFLOW_TOKEN_TTL` (saniye), `TUBEFLOW_RETENTION_DAYS`, `TUBEFLOW_MAX_HISTORY`, `TUBEFLOW_MAX_CONCURRENT` ve `TUBEFLOW_NO_BROWSER=1`.
 
-Downloads are stored in `downloads/`; successful-job metadata is stored in `data/history.json`. By default, downloads older than seven days are removed on startup.
+İndirilen dosyalar `downloads/` klasörüne, başarılı işlemlerin bilgileri `data/history.json` dosyasına kaydedilir. Varsayılan olarak yedi günden eski indirmeler uygulama başlarken temizlenir.
 
-Only use TubeFlow for public content you are authorized to download. Respect copyright and YouTube's terms. Private, membership-restricted, and access-control-bypassing workflows are not supported.
+TubeFlow'u yalnızca indirme izniniz olan herkese açık içerikler için kullanın. Telif haklarına ve YouTube Kullanım Şartları'na uyun. Özel veya üyelik kısıtlamalı içeriklere erişme ya da erişim kontrollerini aşma iş akışları desteklenmez.
 
-## Supporters
+## Destekçiler
+
+Aşağıdaki kişiler FingerMouse deposunda katkıda bulunanlar arasında yer alıyor:
 
 - [Meyremsenge](https://github.com/Meyremsenge)
 - [zehraabut](https://github.com/zehraabut)
