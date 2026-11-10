@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ title }} · LoreFlow</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f7f8;
+      --surface: #ffffff;
+      --ink: #1f1f23;
+      --ink-2: #74747d;
+      --rule: #e8e8ec;
+      --accent-strong: #d91e2b;
+      --accent-ink: #ffffff;
+      --focus: #1f1f23;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; overflow-x: clip; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+    }
+    main {
+      width: min(100%, 26rem);
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .brand { margin: 0 0 24px; font-weight: 700; font-size: 15px; }
+    .brand span { color: var(--accent-strong); }
+    h1 { margin: 0 0 8px; font-size: 22px; line-height: 1.25; overflow-wrap: break-word; }
+    .meta { margin: 0 0 24px; color: var(--ink-2); font-size: 14px; overflow-wrap: anywhere; }
+    .meta span { display: block; }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 12px;
+      background: var(--accent-strong);
+      color: var(--accent-ink);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .note { margin: 20px 0 0; color: var(--ink-2); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="brand">Lore<span>Flow</span></p>
+    <h1>{{ title }}</h1>
+    <p class="meta">
+      <span>{{ filename }}</span>
+      <span>{{ '%.1f'|format(size / 1048576) }} MB</span>
+    </p>
+    <a class="btn" href="/p/{{ token }}/file" download>Telefonuna indir</a>
+    <p class="note">Bu bağlantı sürelidir ve yalnızca aynı Wi-Fi ağındaki telefonlar içindir. Bilgisayarınızda LoreFlow açık kalmalı.</p>
+  </main>
+</body>
+</html>

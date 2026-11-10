@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LoreFlow · Yerel YouTube indirici</title>
+  <meta name="description" content="YouTube bağlantısını inceleyin, kaynakta bulunan ses veya video kalitesini seçin ve dosyayı bilgisayarınıza ya da aynı ağdaki telefonunuza indirin.">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body data-lan-available="{{ 'true' if lan_available else 'false' }}" data-ffmpeg-available="{{ 'true' if ffmpeg_available else 'false' }}">
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-link" viewBox="0 0 24 24">
+      <path d="M10 13.5a4 4 0 0 0 5.7 0l2.8-2.8a4 4 0 1 0-5.7-5.7L11.5 6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M14 10.5a4 4 0 0 0-5.7 0l-2.8 2.8a4 4 0 1 0 5.7 5.7l1.3-1.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-paste" viewBox="0 0 24 24">
+      <rect x="6" y="4.5" width="12" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M9.5 4.5V3.8A1.8 1.8 0 0 1 11.3 2h1.4a1.8 1.8 0 0 1 1.8 1.8v.7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M9 10h6M9 14h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24">
+      <path d="M12 3v11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M7.5 10.5 12 15l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M10.5 18.5h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24">
+      <rect x="3.5" y="3.5" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <rect x="14.5" y="3.5" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <rect x="3.5" y="14.5" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M14.5 14.5h2.5v2.5h-2.5zM20.5 14.5v2.5M17 20.5h3.5M14.5 20.5h.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M12 3.5 21 20H3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 9.5v4.5M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <rect x="8.5" y="8.5" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M15.5 8.5v-2a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="i-history" viewBox="0 0 24 24">
+      <path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M3.5 4.5V9H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 8v4.5l3 1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M8 5.5v13l10-6.5z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <a class="skip" href="#main">İçeriğe geç</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="wordmark" href="/" aria-label="LoreFlow ana sayfa">
+        <span class="wordmark__mark" aria-hidden="true">
+          <svg class="icon icon--play" width="16" height="16"><use href="#i-play"></use></svg>
+        </span>
+        <span class="wordmark__text">Lore<span class="wordmark__accent">Flow</span></span>
+      </a>
+      <span class="local-badge">
+        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-phone"></use></svg>
+        Yerel kullanım
+      </span>
+    </div>
+  </header>
+
+  <main id="main" class="container page">
+    <div class="page__grid">
+      <div class="page__main">
+        <section class="card intro" aria-labelledby="intro-title">
+          <h1 id="intro-title" class="intro__title">Bağlantıyı yapıştır, dosyayı al.</h1>
+          <p class="intro__lede">YouTube videosunun sesini veya görüntüsünü seçin; indirme ve dönüştürme bu bilgisayarda çalışır.</p>
+
+          {% if not ffmpeg_available %}
+          <div class="notice notice--warning">
+            <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-alert"></use></svg>
+            <span>FFmpeg bulunamadı. MP3 dönüşümü ve video birleştirme şu an kullanılamıyor.</span>
+          </div>
+          {% endif %}
+
+          <form id="inspect-form" class="url-form" novalidate>
+            <label class="field-label" for="url-input">YouTube bağlantısı</label>
+            <div class="url-row">
+              <div class="url-field">
+                <svg class="icon url-field__icon" width="20" height="20" aria-hidden="true"><use href="#i-link"></use></svg>
+                <input id="url-input" class="input url-field__input" type="url" name="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.youtube.com/watch?v=" aria-describedby="url-help">
+                <button id="paste-btn" class="icon-btn" type="button" aria-label="Bağlantıyı panodan yapıştır" title="Yapıştır">
+                  <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-paste"></use></svg>
+                </button>
+              </div>
+              <button id="inspect-btn" class="btn btn--primary" type="submit">
+                <span class="btn__spinner" aria-hidden="true"></span>
+                <span class="btn__label">Bağlantıyı incele</span>
+              </button>
+            </div>
+            <p id="url-help" class="helper" role="status" aria-live="polite"></p>
+          </form>
+          <p class="legal-line">Yalnızca indirme izniniz olan, herkese açık içerikler için kullanın.</p>
+        </section>
+
+        <section id="video-card" class="card video-card" aria-labelledby="video-title" hidden>
+          <div class="video-card__media" id="video-media">
+            <img id="video-thumb" class="video-card__thumb" alt="" width="640" height="360" loading="lazy">
+          </div>
+          <div class="video-card__body">
+            <h2 id="video-title" class="video-card__title"></h2>
+            <p class="video-card__meta">
+              <span id="video-uploader" class="video-card__uploader"></span>
+              <span id="video-duration" class="video-card__duration"></span>
+            </p>
+
+            <div class="format">
+              <div class="format__tabs" id="format-tabs" role="tablist" aria-label="İndirme türü">
+                <button class="tab" role="tab" id="tab-mp3" type="button" data-mode="mp3" aria-selected="false" aria-controls="quality-panel" tabindex="-1">MP3</button>
+                <button class="tab" role="tab" id="tab-audio" type="button" data-mode="audio" aria-selected="false" aria-controls="quality-panel" tabindex="-1">Yalnızca ses</button>
+                <button class="tab" role="tab" id="tab-video" type="button" data-mode="video" aria-selected="false" aria-controls="quality-panel" tabindex="-1">MP4 video</button>
+              </div>
+
+              <div id="quality-panel" class="quality-panel" role="tabpanel" aria-labelledby="tab-mp3">
+                <div class="quality-panel__head">
+                  <span class="field-label" id="quality-label">Kalite</span>
+                  <span id="quality-note" class="quality-panel__note"></span>
+                </div>
+                <div id="quality-options" class="quality-options" role="radiogroup" aria-labelledby="quality-label"></div>
+                <p id="format-reason" class="helper helper--warning" hidden></p>
+              </div>
+            </div>
+
+            <button id="download-btn" class="btn btn--primary btn--wide" type="button" disabled>
+              <span class="btn__spinner" aria-hidden="true"></span>
+              <span class="btn__label">İndirmeyi başlat</span>
+            </button>
+            <p id="download-error" class="helper helper--error" hidden></p>
+          </div>
+        </section>
+
+        <section id="job-card" class="card job-card" aria-labelledby="job-title" hidden>
+          <div class="job-card__head">
+            <h2 id="job-title" class="section-title">İşlem durumu</h2>
+            <span id="job-state-chip" class="chip" role="status" aria-live="polite">Sırada</span>
+          </div>
+          <p id="job-file" class="job-card__file"></p>
+
+          <ol id="stage-list" class="stages" aria-label="İşlem aşamaları"></ol>
+
+          <div class="progress">
+            <div id="progress-track" class="progress__track" role="progressbar" aria-labelledby="job-title" aria-valuemin="0" aria-valuemax="100">
+              <div id="progress-fill" class="progress__fill"></div>
+            </div>
+            <div class="progress__labels">
+              <span id="progress-percent" class="progress__percent"></span>
+              <span id="progress-bytes" class="progress__bytes"></span>
+            </div>
+          </div>
+
+          <dl class="metrics">
+            <div class="metrics__item"><dt>İndirilen</dt><dd id="metric-downloaded">Bilinmiyor</dd></div>
+            <div class="metrics__item"><dt>Toplam</dt><dd id="metric-total">Bilinmiyor</dd></div>
+            <div class="metrics__item"><dt>Hız</dt><dd id="metric-speed">Bilinmiyor</dd></div>
+            <div class="metrics__item"><dt>Kalan süre</dt><dd id="metric-eta">Bilinmiyor</dd></div>
+          </dl>
+
+          <div id="job-error" class="notice notice--error" role="alert" hidden>
+            <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-alert"></use></svg>
+            <span id="job-error-text"></span>
+          </div>
+
+          <div class="job-card__actions">
+            <a id="job-download" class="btn btn--primary" href="#" hidden>
+              <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-download"></use></svg>
+              <span>Bilgisayara indir</span>
+            </a>
+            <button id="job-retry" class="btn btn--quiet" type="button" hidden>Yeniden dene</button>
+          </div>
+        </section>
+
+        <section id="history-card" class="card history" aria-labelledby="history-title">
+          <div class="history__head">
+            <h2 id="history-title" class="section-title">Geçmiş</h2>
+            <span id="history-count" class="history__count"></span>
+          </div>
+          <div id="history-body" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <aside class="page__aside" aria-labelledby="phone-title">
+        <section class="card phone">
+          <div class="phone__head">
+            <svg class="icon phone__icon" width="22" height="22" aria-hidden="true"><use href="#i-phone"></use></svg>
+            <div>
+              <h2 id="phone-title" class="phone__title">Telefonuna da indir</h2>
+              <p class="phone__sub">Aynı Wi-Fi ağındaki telefon için süreli QR bağlantısı.</p>
+            </div>
+          </div>
+
+          <div id="qr-panel" class="phone__body">
+            <div id="qr-idle" class="qr-state">
+              <div class="qr-placeholder" aria-hidden="true">
+                <svg class="icon" width="44" height="44"><use href="#i-qr"></use></svg>
+              </div>
+              <p class="qr-state__title">QR kod dosya hazır olunca görünür</p>
+              <p class="qr-state__text">İndirme tamamlandığında burada süreli bir bağlantı oluşur.</p>
+            </div>
+
+            <div id="qr-active" class="qr-state" hidden>
+              <div class="qr-placeholder qr-placeholder--pulse" aria-hidden="true">
+                <svg class="icon" width="44" height="44"><use href="#i-qr"></use></svg>
+              </div>
+              <p class="qr-state__title">Dosya hazırlanıyor</p>
+              <p class="qr-state__text" id="qr-active-stage">İndirme sürüyor.</p>
+            </div>
+
+            <div id="qr-ready" class="qr-state" hidden>
+              <img id="qr-image" class="qr-image" alt="Telefonda indirme bağlantısı için QR kod" width="220" height="220">
+              <p class="qr-state__title">Telefonunla tara</p>
+              <p class="qr-state__text">Telefonun bu bilgisayarla aynı Wi-Fi ağında olmalı.</p>
+              <div class="qr-link">
+                <input id="qr-url" class="input input--readonly" type="text" readonly aria-label="Telefon indirme bağlantısı">
+                <button id="qr-copy" class="icon-btn" type="button" aria-label="Bağlantıyı kopyala" title="Kopyala">
+                  <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-copy"></use></svg>
+                </button>
+              </div>
+              <p id="qr-expiry" class="qr-state__hint"></p>
+              <p id="qr-copy-status" class="visually-hidden" role="status"></p>
+            </div>
+
+            <div id="qr-error" class="qr-state" hidden>
+              <div class="notice notice--error">
+                <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-alert"></use></svg>
+                <span id="qr-error-text">QR bağlantısı oluşturulamadı.</span>
+              </div>
+            </div>
+
+            <div id="qr-disabled" class="qr-state" hidden>
+              <div class="notice notice--warning">
+                <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-alert"></use></svg>
+                <span id="qr-disabled-text">Yerel ağ adresi bulunamadı. QR ile telefon aktarımı devre dışı.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card tips" aria-labelledby="tips-title">
+          <h2 id="tips-title" class="tips__title">Nasıl çalışır?</h2>
+          <ol class="tips__list">
+            <li>Bağlantıyı inceleyin, kaynakta bulunan kaliteleri görün.</li>
+            <li>Türü ve kaliteyi seçip indirmeyi başlatın.</li>
+            <li>Hazır dosyayı bilgisayara indirin ya da QR ile telefonunuza alın.</li>
+          </ol>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>LoreFlow yerel olarak çalışır. Dosyalar bu bilgisayarda saklanır; internete açık bir sunucu değildir.</p>
+      <p>Yalnızca indirme izniniz olan içerikler için kullanın. YouTube şartlarına ve telif haklarına uyun.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

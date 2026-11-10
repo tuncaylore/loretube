@@ -1,0 +1,92 @@
+/* TubeFlow tasarım belirteçleri. Ana damga app.css dosyasındadır. */
+:root {
+  color-scheme: light;
+
+  --color-paper: #f7f7f8;
+  --color-paper-2: #f0f0f2;
+  --color-paper-3: #e8e8ec;
+  --color-surface: #ffffff;
+  --color-ink: #1f1f23;
+  --color-ink-2: #74747d;
+  --color-muted: #8a8a93;
+  --color-rule: #e8e8ec;
+  --color-rule-strong: #d9d9de;
+
+  --color-accent: #ff3b45;
+  --color-accent-strong: #c2182a;
+  --color-accent-soft: #fff0f1;
+  --color-accent-ink: #ffffff;
+  --color-focus: #1f1f23;
+
+  --color-success-bg: #dcefe5;
+  --color-success-ink: #1e6b45;
+  --color-warning-bg: #fff1d6;
+  --color-warning-ink: #8a5a00;
+  --color-error-bg: #fde3e4;
+  --color-error-ink: #9b1c24;
+  --color-error: #c0262f;
+  --color-overlay: rgb(31 31 35 / 0.45);
+
+  --font-display: "Segoe UI Variable Display", "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", Consolas, ui-monospace, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-display: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  --control-height: 52px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgb(31 31 35 / 0.05), 0 8px 20px rgb(31 31 35 / 0.04);
+  --shadow-raised: 0 14px 36px rgb(31 31 35 / 0.10);
+
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --container: 1180px;
+  --gutter: 24px;
+  --gap-columns: 24px;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 200;
+  --z-sticky-nav: 300;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}
+
+@media (max-width: 64rem) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+@media (max-width: 40rem) {
+  :root {
+    --gutter: 16px;
+    --gap-columns: 16px;
+  }
+}
