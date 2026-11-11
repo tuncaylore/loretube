@@ -8,6 +8,9 @@ echo.
 echo  TubeFlow baslatiliyor...
 echo.
 
+powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "%~dp0create_desktop_shortcut.ps1" -ProjectDir "%~dp0."
+if errorlevel 1 echo [UYARI] Masaustu kisayolu olusturulamadi; uygulama baslatilmaya devam edilecek.
+
 where py >nul 2>nul
 if errorlevel 1 (
     echo [HATA] Python Launcher bulunamadi. Python 3.10 veya uzeri kurup tekrar deneyin.

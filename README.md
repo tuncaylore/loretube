@@ -51,7 +51,7 @@ Başarısız indirme denemelerinin geçici dosyaları silinir. Tamamlanmış ind
 ## Windows'ta başlatma
 
 1. Python 3.10 veya üzeri sürümü kurun; Python başlatıcısının (`py`) kullanılabilir olduğundan emin olun.
-2. `run.bat` dosyasına çift tıklayın. Gerekirse `.venv` sanal ortamını oluşturur, `requirements.txt` içindeki paketleri kurar ve uygulamayı başlatır.
+2. `run.bat` dosyasına çift tıklayın. Masaüstünde TubeFlow için YouTube tarzı özel simgeli `TubeFlow - YouTube Baslat` kısayolunu oluşturur veya günceller. Gerekirse `.venv` sanal ortamını oluşturur, `requirements.txt` içindeki paketleri kurar ve uygulamayı başlatır. Sonraki açılışlarda masaüstü kısayolunu kullanabilirsiniz.
 3. Tarayıcı kendiliğinden açılmazsa `http://127.0.0.1:5000` adresine gidin. Uygulamayı durdurmak için terminali kapatın veya Ctrl+C tuşlarına basın.
 
 İlk başlatmada `run.bat`, FFmpeg'i kontrol eder. FFmpeg kurulu değilse ffmpeg.org'un işaret ettiği Windows derleme sağlayıcısı Gyan.dev'den gerekli ZIP dosyasını indirir, yayımlanan SHA-256 özetiyle doğrular ve çalıştırılabilir dosyaları `tools/ffmpeg/bin/` klasörüne kurar. Sistem PATH'i değiştirilmez ve yönetici izni gerekmez. İndirme veya doğrulama başarısız olsa da uygulama açılır; FFmpeg gerektiren özellikler kullanılamayabilir. Var olan FFmpeg konumunu `TUBEFLOW_FFMPEG` ortam değişkeniyle belirtebilirsiniz.
