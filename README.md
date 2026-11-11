@@ -36,3 +36,7 @@ Ortam değişkenleri: `TUBEFLOW_PORT` (varsayılan `5000`), `TUBEFLOW_LAN_PORT` 
 İndirilen dosyalar `downloads/` klasörüne, başarılı işlemlerin bilgileri `data/history.json` dosyasına kaydedilir. Varsayılan olarak yedi günden eski indirmeler uygulama başlarken temizlenir.
 
 TubeFlow'u yalnızca indirme izniniz olan herkese açık içerikler için kullanın. Telif haklarına ve YouTube Kullanım Şartları'na uyun. Özel veya üyelik kısıtlamalı içeriklere erişme ya da erişim kontrollerini aşma iş akışları desteklenmez.
+
+## Lisans
+
+Bu proje MIT Lisansı ile lisanslanmıştır. Ayrıntılar için [LICENSE](LICENSE) dosyasına bakın.
