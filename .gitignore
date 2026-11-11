@@ -22,4 +22,3 @@ Desktop.ini
 # Keep the user-facing project guide; exclude planning/prompt documents.
 *.md
 !README.md
-!fix.md
