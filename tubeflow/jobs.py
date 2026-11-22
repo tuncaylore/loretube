@@ -436,6 +436,7 @@ class JobManager:
             "filename": job.filename,
             "size": job.size,
             "error": job.error,
+            "url": job.url,
             "created_at": _iso(job.created_at),
             "finished_at": _iso(job.finished_at),
             "download_url": None,
